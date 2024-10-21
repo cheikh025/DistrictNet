@@ -4,6 +4,7 @@ using PyCall
 # Import the necessary Python libraries
 @pyimport shapely.geometry as geom
 @pyimport shapely.ops as ops
+@pyimport shapely as shp
 
 include("src/Export/plots.jl")
 
@@ -62,9 +63,10 @@ for (i, city) in enumerate(cities)
             # Print the perimeter, area, and compactness of each district
             compactness = zeros(length(district_polygons))
             for (d, poly) in enumerate(district_polygons)
-                perimeter = poly.length
-                area = poly.area
-                compactness[d] = 4 * π * area / (perimeter^2)
+                circle = shp.minimum_bounding_circle(poly)
+                D_area = poly.area
+                C_area = circle.area
+                compactness[d] = D_area/C_area
             end
 
             all_compactness[m, i, t] = mean(compactness)
@@ -93,3 +95,5 @@ if !isdir("output/csv")
     mkdir("output/csv")
 end
 CSV.write("output//csv//compactness.csv", DataFrame(all_compactness', :auto), writeheader=true)
+
+
