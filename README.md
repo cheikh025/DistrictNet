@@ -1,6 +1,9 @@
 # DISTRICTNET: Decision-Aware Learning for Geographical Districting
 
-DistrictNet is a structured learning approach to find high-quality solutions to real-world districting problems.
+
+[DistrictNet is a structured learning approach to find high-quality solutions to real-world districting problems.](https://arxiv.org/abs/2412.08287)  
+*Accepted at NeurIPS 2024.*
+
 ## Table of Contents
 
 - [Installation](#installation)
